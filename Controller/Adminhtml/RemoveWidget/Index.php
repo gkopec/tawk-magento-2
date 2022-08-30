@@ -48,7 +48,7 @@ class Index extends \Magento\Backend\App\Action
         $response = $this->resultJsonFactory->create();
         $response->setHeader('Content-type', 'application/json');
 
-        $storeId = filter_var($this->request->getParam('id'), FILTER_SANITIZE_STRING);
+        $storeId = (int)$this->request->getParam('id');
         if (!$storeId) {
             return $response->setData(['success' => false]);
         }

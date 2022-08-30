@@ -16,6 +16,11 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 ?>
+<?php
+/** @var $block Tawk\Widget\Block\Adminhtml\SelectWidgetBlock  */
+/** @var $escaper Magento\Framework\Escaper */
+?>
+
  <style>
 
 .websiteids:focus{
@@ -136,7 +141,7 @@ input:checked + .slider:before {
 }
 </style>
 <script type="text/javascript">
-    var baseUrl = '<?= $block->escapeUrl($block->getBaseUrl()) ?>';
+    var baseUrl = '<?= $escaper->escapeUrl($block->getBaseUrl()) ?>';
     require(['jquery', 'jquery/ui'], function($) {
         $.noConflict();
         jQuery(function() {
@@ -175,7 +180,7 @@ input:checked + .slider:before {
                 donotdisplay = jQuery('#donotdisplay').is(":checked");
                 var donotdisplayvalue = donotdisplay ? 1 : 0;
 
-                jQuery.post('<?= $block->escapeUrl($block->getFormAction()) ?>', {
+                jQuery.post('<?= $escaper->escapeUrl($block->getFormAction()) ?>', {
                     pageId   : e.data.pageId,
                     widgetId : e.data.widgetId,
                     id       : jQuery('#websiteids').val(),
@@ -184,14 +189,14 @@ input:checked + .slider:before {
                     alwaysdisplay : alwaysdisplayvalue,
                     donotdisplay: donotdisplayvalue,
                     enableVisitorRecognition : jQuery('#enable_visitor_recognition').is(":checked") ? 1 : 0,
-                    form_key : '<?= $block->escapeJs($block->getFormKey()) ?>'
+                    form_key : '<?= $escaper->escapeJs($block->getFormKey()) ?>'
                 }, function(response) {
                     e.source.postMessage({action : 'setDone'}, baseUrl);
                 });
             }
 
             function removeWidget(e) {
-                var removeWidgetUrl = '<?= $block->escapeUrl($block->getRemoveUrl()) ?>';
+                var removeWidgetUrl = '<?= $escaper->escapeUrl($block->getRemoveUrl()) ?>';
                 jQuery.get(removeWidgetUrl + '?id=' + jQuery( "#websiteids" ).val(), function (response) {
                     e.source.postMessage({action : 'removeDone'}, baseUrl);
                 });
@@ -218,7 +223,7 @@ input:checked + .slider:before {
                 donotdisplay = jQuery('#donotdisplay').is(":checked");
                 var donotdisplayvalue = donotdisplay ? 1 : 0;
 
-                jQuery.post('<?= $block->escapeUrl($block->getFormAction()) ?>', {
+                jQuery.post('<?= $escaper->escapeUrl($block->getFormAction()) ?>', {
                     pageId     : "-1",
                     widgetId   : "-1",
                     id         : jQuery('#websiteids').val(),
@@ -227,7 +232,7 @@ input:checked + .slider:before {
                     alwaysdisplay : alwaysdisplayvalue,
                     donotdisplay: donotdisplayvalue,
                     enableVisitorRecognition : jQuery('#enable_visitor_recognition').is(":checked") ? 1 : 0,
-                    form_key : '<?= $block->escapeJs($block->getFormKey()) ?>'
+                    form_key : '<?= $escaper->escapeJs($block->getFormKey()) ?>'
                 }, function() {
                     alert('Visibility options Saved');
                 });
@@ -269,8 +274,8 @@ input:checked + .slider:before {
         });
 
         function displayWidget (websiteId) {
-            var storedWidgetUrl = '<?= $block->escapeUrl($block->getStoreWidget()) ?>';
-            var domain = '<?= $block->escapeUrl($block->mainurl()) ?>';
+            var storedWidgetUrl = '<?= $escaper->escapeUrl($block->getStoreWidget()) ?>';
+            var domain = '<?= $escaper->escapeUrl($block->mainurl()) ?>';
             jQuery.get(storedWidgetUrl + '?id=' + websiteId, function (response) {
                 var src = baseUrl + '/generic/widgets?';
                 if (response.widgetid) {
@@ -314,7 +319,7 @@ input:checked + .slider:before {
 <iframe
     id="tawk_widget_customization"
     style="border:none; width:100%; margin: 0; padding: 0; margin-top: 24px; min-height: 300px"
-    src="<?= $block->escapeUrl($block->getIframeUrl()) ?>">
+    src="<?= $escaper->escapeUrl($block->getIframeUrl()) ?>">
 </iframe>
 
 <div id="visibility_options">
