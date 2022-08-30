@@ -110,7 +110,7 @@ class Embed extends Template
             $display = true;
 
             $excluded_url_list = $this->model->getExcludeUrl();
-            if (strlen($excluded_url_list) > 0) {
+            if ($excluded_url_list && strlen($excluded_url_list) > 0) {
                 $current_url = $httpHost . $requestUri;
                 $current_url = urldecode($current_url);
 
@@ -138,7 +138,7 @@ class Embed extends Template
             $display = false;
 
             $included_url_list = $this->model->getIncludeUrl();
-            if (strlen($included_url_list) > 0) {
+            if ($included_url_list && strlen($included_url_list) > 0) {
                 $current_url = $httpHost . $requestUri;
                 $current_url = urldecode($current_url);
 
