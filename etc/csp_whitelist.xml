@@ -47,6 +47,7 @@
         <policy id="img-src">
             <values>
                 <value id="tawkto" type="host">*.tawk.to</value>
+                <value id="tawkto-link" type="host">tawk.link</value>
                 <value id="jsdelivr-cdn" type="host">cdn.jsdelivr.net</value>
             </values>
         </policy>
